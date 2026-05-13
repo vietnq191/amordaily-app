@@ -8,6 +8,7 @@
   [![Flutter Version](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter)](https://flutter.dev/)
   [![Dart Version](https://img.shields.io/badge/Dart-3.x-0175C2?logo=dart)](https://dart.dev/)
   [![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20Android-lightgrey)](#)
+  [![Flutter CI](https://github.com/vietnq191/amordaily-app/actions/workflows/main.yml/badge.svg)](https://github.com/vietnq191/amordaily-app/actions/workflows/main.yml)
   [![License](https://img.shields.io/badge/License-Non--Commercial-red)](#-important-disclaimer)
   [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#-contributing)
 </div>
