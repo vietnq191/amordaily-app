@@ -6,7 +6,7 @@ void main() {
     /* Accessing private _strings is tricky in Dart without reflection, 
        but we can test the t() method for all keys. */
 
-    final List<String> languages = ['vi', 'en', 'ja', 'ko', 'zh', 'ru'];
+    final List<String> languages = AppLocalizations.supportedCodes;
     
     /* List of all known keys based on the Vietnamese source */
     final List<String> expectedKeys = [

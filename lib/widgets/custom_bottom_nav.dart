@@ -17,7 +17,7 @@ class CustomBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 24,
+      bottom: 24 + MediaQuery.of(context).padding.bottom,
       left: 24,
       right: 24,
       child: ClipRRect(

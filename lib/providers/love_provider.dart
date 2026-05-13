@@ -135,6 +135,12 @@ class LoveProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void updateMilestone(int index, String title, DateTime date) {
+    _story.customMilestones[index] = Milestone(title: title, date: date);
+    saveData();
+    notifyListeners();
+  }
+
   int get daysTogether {
     return DateTime.now().difference(_story.startDate).inDays;
   }

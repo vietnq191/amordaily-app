@@ -347,15 +347,15 @@ class AppLocalizations {
   };
 
   static const Map<String, String> languageNames = {
-    'vi': '🇻🇳 Tiếng Việt',
     'en': '🇬🇧 English',
+    'vi': '🇻🇳 Tiếng Việt',
+    'ru': '🇷🇺 Русский',
     'ja': '🇯🇵 日本語',
     'ko': '🇰🇷 한국어',
     'zh': '🇨🇳 中文',
-    'ru': '🇷🇺 Русский',
   };
 
-  static const List<String> supportedCodes = ['vi', 'en', 'ja', 'ko', 'zh', 'ru'];
+  static const List<String> supportedCodes = ['en', 'vi', 'ru', 'ja', 'ko', 'zh'];
 
   String t(String key) {
     return _strings[code]?[key] ?? _strings['en']?[key] ?? key;

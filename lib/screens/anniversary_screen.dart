@@ -23,12 +23,12 @@ class AnniversaryScreen extends StatelessWidget {
             actions: [
               IconButton(
                 icon: const Icon(Icons.add_rounded, color: AppColors.primary),
-                onPressed: () => _showAddMilestoneDialog(context, loveProvider, loc),
+                onPressed: () => _showMilestoneDialog(context, loveProvider, loc),
               ),
               const SizedBox(width: 8),
             ],
           ),
-          body: _buildBody(context, loveProvider, loc),
+          body: SafeArea(child: _buildBody(context, loveProvider, loc)),
         );
       },
     );
@@ -58,6 +58,9 @@ class AnniversaryScreen extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               borderRadius: BorderRadius.circular(18),
+              onTap: !isDefault && m.containsKey('customIndex')
+                  ? () => _showMilestoneDialog(context, loveProvider, loc, index: m['customIndex'] as int)
+                  : null,
               onLongPress: !isDefault && m.containsKey('customIndex')
                   ? () => _showDeleteDialog(context, loveProvider, m['customIndex'] as int, loc)
                   : null,
@@ -142,17 +145,23 @@ class AnniversaryScreen extends StatelessWidget {
      Or just handle it here for the screen. */
 
 
-  Future<void> _showAddMilestoneDialog(BuildContext context, LoveProvider provider, AppLocalizations loc) async {
-    final titleController = TextEditingController();
-    DateTime selectedDate = DateTime.now();
+  Future<void> _showMilestoneDialog(BuildContext context, LoveProvider provider, AppLocalizations loc, {int? index}) async {
+    final isEditing = index != null;
+    final titleController = TextEditingController(
+      text: isEditing ? provider.story.customMilestones[index].title : '',
+    );
+    DateTime selectedDate = isEditing ? provider.story.customMilestones[index].date : DateTime.now();
 
     await showDialog(
       context: context,
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setDialogState) => AlertDialog(
           backgroundColor: const Color(0xFF1E1E2E),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          title: Text(loc.t('add_anniversary'), style: const TextStyle(color: Colors.white)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          title: Text(
+            isEditing ? loc.t('edit_anniversary') : loc.t('add_anniversary'),
+            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -162,11 +171,13 @@ class AnniversaryScreen extends StatelessWidget {
                 decoration: InputDecoration(
                   hintText: loc.t('anniversary_name_hint'),
                   hintStyle: const TextStyle(color: Colors.white38),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.2)),
+                  filled: true,
+                  fillColor: Colors.white.withValues(alpha: 0.05),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide.none,
                   ),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                 ),
               ),
               const SizedBox(height: 16),
@@ -177,19 +188,32 @@ class AnniversaryScreen extends StatelessWidget {
                     initialDate: selectedDate,
                     firstDate: DateTime(1900),
                     lastDate: DateTime(2100),
+                    builder: (context, child) {
+                      return Theme(
+                        data: Theme.of(context).copyWith(
+                          colorScheme: const ColorScheme.dark(
+                            primary: AppColors.primary,
+                            onPrimary: Colors.white,
+                            surface: Color(0xFF1E1E2E),
+                            onSurface: Colors.white,
+                          ),
+                        ),
+                        child: child!,
+                      );
+                    },
                   );
                   if (picked != null) setDialogState(() => selectedDate = picked);
                 },
                 child: Container(
-                  padding: const EdgeInsets.all(14),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
-                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.white.withValues(alpha: 0.05),
+                    borderRadius: BorderRadius.circular(15),
                   ),
                   child: Row(
                     children: [
                       const Icon(Icons.calendar_today_rounded, color: AppColors.primary, size: 18),
-                      const SizedBox(width: 10),
+                      const SizedBox(width: 12),
                       Text(
                         DateFormat('dd/MM/yyyy').format(selectedDate),
                         style: const TextStyle(color: Colors.white),
@@ -200,17 +224,39 @@ class AnniversaryScreen extends StatelessWidget {
               ),
             ],
           ),
+          actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(ctx), child: Text(loc.t('cancel'))),
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: Text(
+                loc.t('cancel'),
+                style: const TextStyle(color: Colors.white54, fontWeight: FontWeight.w600),
+              ),
+            ),
+            const SizedBox(width: 8),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              ),
               onPressed: () {
-                if (titleController.text.trim().isNotEmpty) {
-                  provider.addMilestone(titleController.text.trim(), selectedDate);
+                final title = titleController.text.trim();
+                if (title.isNotEmpty) {
+                  if (isEditing) {
+                    provider.updateMilestone(index, title, selectedDate);
+                  } else {
+                    provider.addMilestone(title, selectedDate);
+                  }
                   Navigator.pop(ctx);
                 }
               },
-              child: Text(loc.t('add')),
+              child: Text(
+                isEditing ? loc.t('save') : loc.t('add'),
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
           ],
         ),
@@ -223,15 +269,21 @@ class AnniversaryScreen extends StatelessWidget {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: const Color(0xFF1E1E2E),
-        title: Text(loc.t('delete_anniversary'), style: const TextStyle(color: Colors.white)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        title: Text(loc.t('delete_anniversary'), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(loc.t('cancel'))),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(loc.t('cancel'), style: const TextStyle(color: Colors.white54, fontWeight: FontWeight.w600)),
+          ),
+          const SizedBox(width: 8),
           TextButton(
             onPressed: () {
               provider.removeMilestone(customIndex);
               Navigator.pop(ctx);
             },
-            child: Text(loc.t('delete'), style: const TextStyle(color: Colors.redAccent)),
+            child: Text(loc.t('delete'), style: const TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
           ),
         ],
       ),

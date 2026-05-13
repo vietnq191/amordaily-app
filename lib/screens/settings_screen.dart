@@ -25,98 +25,100 @@ class SettingsScreen extends StatelessWidget {
             elevation: 0,
             centerTitle: true,
           ),
-          body: ListView(
-            padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 120),
-            children: [
-              _sectionTitle(loc.t('your_profile')),
-              _card(children: [
-                _editTile(context, title: loc.t('your_name'), value: story.partner1Name,
-                    onTap: () => _editName(context, loveProvider, true, loc)),
-                _divider(),
-                _dateTile(context, title: loc.t('your_birthday'), date: story.partner1BirthDate,
-                    onTap: () => _selectDate(context, loveProvider, true, true, loc)),
-                _divider(),
-                _imageTile(title: loc.t('your_photo'), path: story.partner1ImagePath,
-                    onTap: () => _pickImage(context, loveProvider, true)),
-              ]),
-              const SizedBox(height: 16),
-              _sectionTitle(loc.t('partner_profile')),
-              _card(children: [
-                _editTile(context, title: loc.t('partner_name'), value: story.partner2Name,
-                    onTap: () => _editName(context, loveProvider, false, loc)),
-                _divider(),
-                _dateTile(context, title: loc.t('partner_birthday'), date: story.partner2BirthDate,
-                    onTap: () => _selectDate(context, loveProvider, false, true, loc)),
-                _divider(),
-                _imageTile(title: loc.t('partner_photo'), path: story.partner2ImagePath,
-                    onTap: () => _pickImage(context, loveProvider, false)),
-              ]),
-              const SizedBox(height: 16),
-              _sectionTitle(loc.t('love_story')),
-              _card(children: [
-                _dateTile(context, title: loc.t('love_start_date'), date: story.startDate,
-                    onTap: () => _selectDate(context, loveProvider, false, false, loc)),
-              ]),
-              const SizedBox(height: 16),
-              _sectionTitle(loc.t('display')),
-              _card(children: [
-                SwitchListTile(
-                  title: Text(loc.t('show_age'), style: const TextStyle(color: Colors.white)),
-                  value: story.showAge,
-                  onChanged: (val) {
-                    story.showAge = val;
-                    loveProvider.updateStory(story);
-                  },
-                  activeColor: AppColors.primary,
-                ),
-                _divider(),
-                SwitchListTile(
-                  title: Text(loc.t('show_zodiac'), style: const TextStyle(color: Colors.white)),
-                  value: story.showZodiac,
-                  onChanged: (val) {
-                    story.showZodiac = val;
-                    loveProvider.updateStory(story);
-                  },
-                  activeColor: AppColors.primary,
-                ),
-                _divider(),
-                SwitchListTile(
-                  title: Text(loc.t('show_quotes'), style: const TextStyle(color: Colors.white)),
-                  value: story.showQuotes,
-                  onChanged: (val) {
-                    story.showQuotes = val;
-                    loveProvider.updateStory(story);
-                  },
-                  activeColor: AppColors.primary,
-                ),
-              ]),
-              const SizedBox(height: 16),
-              _sectionTitle(loc.t('language')),
-              _card(children: [
-                ListTile(
-                  title: Text(AppLocalizations.languageNames[story.language] ?? story.language,
-                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                  trailing: const Icon(Icons.language_rounded, color: AppColors.primary),
-                  onTap: () => _showLanguageSelectDialog(context, loveProvider, loc),
-                ),
-              ]),
-              const SizedBox(height: 16),
-              _sectionTitle(loc.t('app_info')),
-              _card(children: [
-                ListTile(
-                  leading: const Icon(Icons.person_rounded, color: AppColors.primary),
-                  title: Text(loc.t('copyright'), style: const TextStyle(color: Colors.white70)),
-                  subtitle: const Text('vietnq191', style: TextStyle(color: Colors.white)),
-                ),
-                _divider(),
-                ListTile(
-                  leading: const Icon(Icons.email_rounded, color: AppColors.primary),
-                  title: Text(loc.t('support'), style: const TextStyle(color: Colors.white70)),
-                  subtitle: const Text('vietnq191@gmail.com', style: TextStyle(color: Colors.white)),
-                ),
-              ]),
-              const SizedBox(height: 32),
-            ],
+          body: SafeArea(
+            child: ListView(
+              padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 120),
+              children: [
+                _sectionTitle(loc.t('your_profile')),
+                _card(children: [
+                  _editTile(context, title: loc.t('your_name'), value: story.partner1Name,
+                      onTap: () => _editName(context, loveProvider, true, loc)),
+                  _divider(),
+                  _dateTile(context, title: loc.t('your_birthday'), date: story.partner1BirthDate,
+                      onTap: () => _selectDate(context, loveProvider, true, true, loc)),
+                  _divider(),
+                  _imageTile(title: loc.t('your_photo'), path: story.partner1ImagePath,
+                      onTap: () => _pickImage(context, loveProvider, true)),
+                ]),
+                const SizedBox(height: 16),
+                _sectionTitle(loc.t('partner_profile')),
+                _card(children: [
+                  _editTile(context, title: loc.t('partner_name'), value: story.partner2Name,
+                      onTap: () => _editName(context, loveProvider, false, loc)),
+                  _divider(),
+                  _dateTile(context, title: loc.t('partner_birthday'), date: story.partner2BirthDate,
+                      onTap: () => _selectDate(context, loveProvider, false, true, loc)),
+                  _divider(),
+                  _imageTile(title: loc.t('partner_photo'), path: story.partner2ImagePath,
+                      onTap: () => _pickImage(context, loveProvider, false)),
+                ]),
+                const SizedBox(height: 16),
+                _sectionTitle(loc.t('love_story')),
+                _card(children: [
+                  _dateTile(context, title: loc.t('love_start_date'), date: story.startDate,
+                      onTap: () => _selectDate(context, loveProvider, false, false, loc)),
+                ]),
+                const SizedBox(height: 16),
+                _sectionTitle(loc.t('display')),
+                _card(children: [
+                  SwitchListTile(
+                    title: Text(loc.t('show_age'), style: const TextStyle(color: Colors.white)),
+                    value: story.showAge,
+                    onChanged: (val) {
+                      story.showAge = val;
+                      loveProvider.updateStory(story);
+                    },
+                    activeColor: AppColors.primary,
+                  ),
+                  _divider(),
+                  SwitchListTile(
+                    title: Text(loc.t('show_zodiac'), style: const TextStyle(color: Colors.white)),
+                    value: story.showZodiac,
+                    onChanged: (val) {
+                      story.showZodiac = val;
+                      loveProvider.updateStory(story);
+                    },
+                    activeColor: AppColors.primary,
+                  ),
+                  _divider(),
+                  SwitchListTile(
+                    title: Text(loc.t('show_quotes'), style: const TextStyle(color: Colors.white)),
+                    value: story.showQuotes,
+                    onChanged: (val) {
+                      story.showQuotes = val;
+                      loveProvider.updateStory(story);
+                    },
+                    activeColor: AppColors.primary,
+                  ),
+                ]),
+                const SizedBox(height: 16),
+                _sectionTitle(loc.t('language')),
+                _card(children: [
+                  ListTile(
+                    title: Text(AppLocalizations.languageNames[story.language] ?? story.language,
+                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                    trailing: const Icon(Icons.language_rounded, color: AppColors.primary),
+                    onTap: () => _showLanguageSelectDialog(context, loveProvider, loc),
+                  ),
+                ]),
+                const SizedBox(height: 16),
+                _sectionTitle(loc.t('app_info')),
+                _card(children: [
+                  ListTile(
+                    leading: const Icon(Icons.person_rounded, color: AppColors.primary),
+                    title: Text(loc.t('copyright'), style: const TextStyle(color: Colors.white70)),
+                    subtitle: const Text('vietnq191', style: TextStyle(color: Colors.white)),
+                  ),
+                  _divider(),
+                  ListTile(
+                    leading: const Icon(Icons.email_rounded, color: AppColors.primary),
+                    title: Text(loc.t('support'), style: const TextStyle(color: Colors.white70)),
+                    subtitle: const Text('vietnq191@gmail.com', style: TextStyle(color: Colors.white)),
+                  ),
+                ]),
+                const SizedBox(height: 32),
+              ],
+            ),
           ),
         );
       },
@@ -185,24 +187,40 @@ class SettingsScreen extends StatelessWidget {
     await showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2E),
-        title: Text(isP1 ? loc.t('your_name') : loc.t('partner_name'), style: const TextStyle(color: Colors.white)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        title: Text(
+          isP1 ? loc.t('your_name') : loc.t('partner_name'),
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
         content: TextField(
           controller: ctrl,
           style: const TextStyle(color: Colors.white),
           autofocus: true,
           decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.2)),
+            filled: true,
+            fillColor: Colors.white.withValues(alpha: 0.05),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide.none,
             ),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           ),
         ),
+        actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(loc.t('cancel'))),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(loc.t('cancel'), style: const TextStyle(color: Colors.white54, fontWeight: FontWeight.w600)),
+          ),
+          const SizedBox(width: 8),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: Colors.white,
+              elevation: 0,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
             onPressed: () {
               final story = provider.story;
               if (isP1) {
@@ -213,7 +231,7 @@ class SettingsScreen extends StatelessWidget {
               provider.updateStory(story);
               Navigator.pop(ctx);
             },
-            child: Text(loc.t('save'), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            child: Text(loc.t('save'), style: const TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -230,6 +248,19 @@ class SettingsScreen extends StatelessWidget {
       initialDate: initial,
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.dark(
+              primary: AppColors.primary,
+              onPrimary: Colors.white,
+              surface: Color(0xFF1E1E2E),
+              onSurface: Colors.white,
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
 
     if (picked != null) {
@@ -266,9 +297,8 @@ class SettingsScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF1E1E2E),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: Text(loc.t('language'), style: const TextStyle(color: Colors.white)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        title: Text(loc.t('language'), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         content: SizedBox(
           width: double.maxFinite,
           child: ListView(
@@ -296,8 +326,12 @@ class SettingsScreen extends StatelessWidget {
             }).toList(),
           ),
         ),
+        actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(loc.t('cancel'))),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(loc.t('cancel'), style: const TextStyle(color: Colors.white54, fontWeight: FontWeight.w600)),
+          ),
         ],
       ),
     );
