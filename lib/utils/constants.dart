@@ -6,7 +6,7 @@ class AppColors {
   static const Color accent = Color(0xFFFFB3C1);
   static const Color background = Color(0xFF121212);
   static const Color surface = Color(0xFF1E1E1E);
-  
+
   static const LinearGradient loveGradient = LinearGradient(
     colors: [Color(0xFFFF4D6D), Color(0xFF7B2CBF)],
     begin: Alignment.topLeft,

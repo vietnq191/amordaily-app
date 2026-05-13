@@ -63,7 +63,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return Consumer<LoveProvider>(
       builder: (context, loveProvider, _) {
         if (loveProvider.isLoading) {
-          return const Scaffold(body: Center(child: CircularProgressIndicator()));
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
         }
         final story = loveProvider.story;
         final loc = loveProvider.loc;
@@ -81,103 +83,125 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 child: Column(
                   children: [
                     const SizedBox(height: 16),
-                  Text(
-                    loc.t('our_love_story'),
-                    style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.5),
-                      letterSpacing: 3,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
+                    Text(
+                      loc.t('our_love_story'),
+                      style: TextStyle(
+                        color: Colors.white.withValues(alpha: 0.5),
+                        letterSpacing: 3,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 28),
-                  /* Avatars overlapping with floating heart */
-                  AnimatedBuilder(
-                    animation: _floatY,
-                    builder: (context, _) {
-                      return Transform.translate(
-                        offset: Offset(0, _floatY.value),
-                        child: _buildAvatarRow(story, loveProvider),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 40),
-                  _buildCounter(loveProvider.daysTogether, loc),
-                  const SizedBox(height: 8),
-                  Text(
-                    '${story.partner1Name} & ${story.partner2Name}  •  ${loc.t('since')} ${AppLocalizations.formatDate(story.startDate, story.language)}',
-                    style: TextStyle(color: Colors.white.withValues(alpha: 0.75), fontSize: 14),
-                    textAlign: TextAlign.center,
-                  ),
-                  if (story.showQuotes && _currentQuote != null) ...[
-                    const SizedBox(height: 32),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Stack(
-                        clipBehavior: Clip.none,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(24),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Colors.white.withValues(alpha: 0.12),
-                                      Colors.white.withValues(alpha: 0.03),
-                                    ],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                  ),
-                                  borderRadius: BorderRadius.circular(24),
-                                  border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withValues(alpha: 0.2),
-                                      blurRadius: 20,
-                                      spreadRadius: -5,
-                                    ),
-                                  ],
+                    const SizedBox(height: 28),
+                    /* Avatars overlapping with floating heart */
+                    AnimatedBuilder(
+                      animation: _floatY,
+                      builder: (context, _) {
+                        return Transform.translate(
+                          offset: Offset(0, _floatY.value),
+                          child: _buildAvatarRow(story, loveProvider),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 40),
+                    _buildCounter(loveProvider.daysTogether, loc),
+                    const SizedBox(height: 8),
+                    Text(
+                      '${story.partner1Name} & ${story.partner2Name}  •  ${loc.t('since')} ${AppLocalizations.formatDate(story.startDate, story.language)}',
+                      style: TextStyle(
+                        color: Colors.white.withValues(alpha: 0.75),
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    if (story.showQuotes && _currentQuote != null) ...[
+                      const SizedBox(height: 32),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(24),
+                              child: BackdropFilter(
+                                filter: ImageFilter.blur(
+                                  sigmaX: 15,
+                                  sigmaY: 15,
                                 ),
-                                child: Column(
-                                  children: [
-                                    const Icon(Icons.format_quote_rounded, color: AppColors.primary, size: 32),
-                                    const SizedBox(height: 12),
-                                    Text(
-                                      _currentQuote!,
-                                      style: GoogleFonts.playfairDisplay(
-                                        textStyle: TextStyle(
-                                          color: Colors.white.withValues(alpha: 0.95),
-                                          fontSize: 16,
-                                          height: 1.6,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      textAlign: TextAlign.center,
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 24,
+                                    vertical: 28,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.white.withValues(alpha: 0.12),
+                                        Colors.white.withValues(alpha: 0.03),
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
                                     ),
-                                  ],
+                                    borderRadius: BorderRadius.circular(24),
+                                    border: Border.all(
+                                      color: Colors.white.withValues(
+                                        alpha: 0.15,
+                                      ),
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withValues(
+                                          alpha: 0.2,
+                                        ),
+                                        blurRadius: 20,
+                                        spreadRadius: -5,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      const Icon(
+                                        Icons.format_quote_rounded,
+                                        color: AppColors.primary,
+                                        size: 32,
+                                      ),
+                                      const SizedBox(height: 12),
+                                      Text(
+                                        _currentQuote!,
+                                        style: GoogleFonts.playfairDisplay(
+                                          textStyle: TextStyle(
+                                            color: Colors.white.withValues(
+                                              alpha: 0.95,
+                                            ),
+                                            fontSize: 16,
+                                            height: 1.6,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
+                    ],
+                    const SizedBox(height: 40),
+                    if (nextMilestone != null)
+                      _buildUpcomingCard(nextMilestone, loc),
+                    const SizedBox(height: 120) /* Padding for bottom nav */,
                   ],
-                  const SizedBox(height: 40),
-                  if (nextMilestone != null) _buildUpcomingCard(nextMilestone, loc),
-                  const SizedBox(height: 120), /* Padding for bottom nav */
-                ],
+                ),
               ),
             ),
           ),
-        ),
-      );
-    },
-  );
-}
+        );
+      },
+    );
+  }
 
   Widget _buildAvatarRow(LoveStory story, LoveProvider provider) {
     return Padding(
@@ -207,9 +231,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   child: Container(
                     width: 72,
                     height: 72,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                    ),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
                     child: const Icon(
                       Icons.favorite_rounded,
                       color: Color(0xFFFF6B8A),
@@ -235,12 +257,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildAvatar(String name, String? path, DateTime? birthDate, LoveProvider provider, {required bool isLeft}) {
+  Widget _buildAvatar(
+    String name,
+    String? path,
+    DateTime? birthDate,
+    LoveProvider provider, {
+    required bool isLeft,
+  }) {
     return Container(
       width: 110,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-      ),
+      decoration: const BoxDecoration(shape: BoxShape.circle),
       child: Column(
         children: [
           Container(
@@ -248,7 +274,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: const LinearGradient(
-                colors: [Color(0xFFFF6B8A), Color(0xFFBF4080), Color(0xFF7B2D8B)],
+                colors: [
+                  Color(0xFFFF6B8A),
+                  Color(0xFFBF4080),
+                  Color(0xFF7B2D8B),
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -258,19 +288,30 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               backgroundColor: const Color(0xFF3D1060),
               backgroundImage: path != null ? FileImage(File(path)) : null,
               child: path == null
-                  ? const Icon(Icons.person_rounded, size: 40, color: Colors.white70)
+                  ? const Icon(
+                      Icons.person_rounded,
+                      size: 40,
+                      color: Colors.white70,
+                    )
                   : null,
             ),
           ),
           const SizedBox(height: 10),
           Text(
             name,
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
           ),
           if (provider.story.showAge && birthDate != null)
             Text(
               '${provider.getAge(birthDate)} ${provider.loc.t('age')}',
-              style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 12),
+              style: TextStyle(
+                color: Colors.white.withValues(alpha: 0.7),
+                fontSize: 12,
+              ),
             ),
           if (provider.story.showZodiac && birthDate != null)
             Container(
@@ -283,7 +324,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
               child: Text(
                 provider.getZodiacSign(birthDate),
-                style: TextStyle(color: Colors.white.withValues(alpha: 0.9), fontSize: 10, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                  color: Colors.white.withValues(alpha: 0.9),
+                  fontSize: 10,
+                  fontWeight: FontWeight.w500,
+                ),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -355,7 +400,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     color: AppColors.primary.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  child: const Icon(Icons.favorite_rounded, color: AppColors.primary, size: 22),
+                  child: const Icon(
+                    Icons.favorite_rounded,
+                    color: AppColors.primary,
+                    size: 22,
+                  ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -364,27 +413,43 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     children: [
                       Text(
                         loc.t('upcoming_anniversary'),
-                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         milestone['title'] as String,
-                        style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 13),
+                        style: TextStyle(
+                          color: Colors.white.withValues(alpha: 0.7),
+                          fontSize: 13,
+                        ),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.primary.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.primary.withValues(alpha: 0.4)),
+                    border: Border.all(
+                      color: AppColors.primary.withValues(alpha: 0.4),
+                    ),
                   ),
                   child: Text(
                     '$daysLeft\n${loc.t('days_unit')}',
                     textAlign: TextAlign.center,
-                    style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 13),
+                    style: const TextStyle(
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
                   ),
                 ),
               ],

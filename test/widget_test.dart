@@ -9,7 +9,9 @@ void main() {
   /* Mock SharedPreferences */
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('App smoke test - verify navigation and main elements', (WidgetTester tester) async {
+  testWidgets('App smoke test - verify navigation and main elements', (
+    WidgetTester tester,
+  ) async {
     SharedPreferences.setMockInitialValues({});
 
     /* Build our app and trigger a frame. */
@@ -37,7 +39,7 @@ void main() {
       await tester.tap(anniversaryTab);
       /* Pump again to transition */
       await tester.pump(const Duration(milliseconds: 500));
-      
+
       /* Verify we see the anniversary title */
       expect(find.text('Anniversary'), findsOneWidget);
     }
@@ -47,7 +49,7 @@ void main() {
     if (settingsTab.evaluate().isNotEmpty) {
       await tester.tap(settingsTab);
       await tester.pump(const Duration(milliseconds: 500));
-      
+
       /* Verify we see Settings title */
       expect(find.text('Settings'), findsOneWidget);
     }

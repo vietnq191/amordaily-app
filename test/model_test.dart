@@ -6,15 +6,13 @@ void main() {
     test('toJson and fromJson should be symmetrical', () {
       final originalDate = DateTime(2022, 5, 20, 10, 30);
       final milestoneDate = DateTime(2023, 1, 1);
-      
+
       final originalStory = LoveStory(
         partner1Name: 'Viet',
         partner2Name: 'Ngan',
         startDate: originalDate,
         language: 'vi',
-        customMilestones: [
-          Milestone(title: 'First Trip', date: milestoneDate),
-        ],
+        customMilestones: [Milestone(title: 'First Trip', date: milestoneDate)],
         showAge: false,
       );
 
@@ -36,9 +34,9 @@ void main() {
         'startDate': DateTime.now().toIso8601String(),
         /* missing other fields */
       };
-      
+
       final story = LoveStory.fromJson(json);
-      
+
       expect(story.partner1Name, equals('You'));
       expect(story.partner2Name, equals('Partner'));
       expect(story.showAge, isTrue);

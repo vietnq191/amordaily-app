@@ -22,7 +22,6 @@ void main() {
   );
 }
 
-
 class AmorDailyApp extends StatelessWidget {
   const AmorDailyApp({super.key});
 
@@ -33,7 +32,9 @@ class AmorDailyApp extends StatelessWidget {
       title: 'Amordaily',
       debugShowCheckedModeBanner: false,
       locale: Locale(loveProvider.story.language),
-      supportedLocales: AppLocalizations.supportedCodes.map((code) => Locale(code)).toList(),
+      supportedLocales: AppLocalizations.supportedCodes
+          .map((code) => Locale(code))
+          .toList(),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -46,7 +47,6 @@ class AmorDailyApp extends StatelessWidget {
     );
   }
 }
-
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -80,10 +80,14 @@ class _MainNavigationState extends State<MainNavigation> {
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) return;
         final now = DateTime.now();
-        if (_lastQuitTime == null || now.difference(_lastQuitTime!) > const Duration(seconds: 2)) {
+        if (_lastQuitTime == null ||
+            now.difference(_lastQuitTime!) > const Duration(seconds: 2)) {
           _lastQuitTime = now;
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Nhấn lần nữa để thoát'), duration: Duration(seconds: 2)),
+            const SnackBar(
+              content: Text('Nhấn lần nữa để thoát'),
+              duration: Duration(seconds: 2),
+            ),
           );
           return;
         }
@@ -96,7 +100,8 @@ class _MainNavigationState extends State<MainNavigation> {
             children: [
               PageView(
                 controller: _pageController,
-                onPageChanged: (index) => setState(() => _selectedIndex = index),
+                onPageChanged: (index) =>
+                    setState(() => _selectedIndex = index),
                 children: const [
                   HomeScreen(),
                   AnniversaryScreen(),

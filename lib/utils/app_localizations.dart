@@ -57,7 +57,8 @@ class AppLocalizations {
       'show_quotes': 'Hiển thị câu nói hay',
       'quote_1': 'Yêu không phải là nhìn nhau, mà là cùng nhìn về một hướng.',
       'quote_2': 'Nơi nào có tình yêu, nơi đó có sự sống.',
-      'quote_3': 'Chỉ mất một giây để nói lời yêu, nhưng mất cả đời để chứng minh điều đó.',
+      'quote_3':
+          'Chỉ mất một giây để nói lời yêu, nhưng mất cả đời để chứng minh điều đó.',
       'quote_4': 'Em là lý do khiến anh mỉm cười mỗi ngày.',
       'quote_5': 'Hạnh phúc lớn nhất đời người là tìm được đúng người để yêu.',
       'partner_birthday_event': 'Sinh nhật người ấy',
@@ -112,11 +113,14 @@ class AppLocalizations {
       'days_together_milestone': 'days together',
       'since': 'Since',
       'show_quotes': 'Show Love Quotes',
-      'quote_1': 'Love is not looking at each other, but looking together in the same direction.',
+      'quote_1':
+          'Love is not looking at each other, but looking together in the same direction.',
       'quote_2': 'Where there is love, there is life.',
-      'quote_3': 'It takes a second to say I love you, but a lifetime to prove it.',
+      'quote_3':
+          'It takes a second to say I love you, but a lifetime to prove it.',
       'quote_4': 'You are the reason I smile every day.',
-      'quote_5': 'The greatest happiness in life is to find the right person to love.',
+      'quote_5':
+          'The greatest happiness in life is to find the right person to love.',
       'partner_birthday_event': 'Partner\'s Birthday',
       'your_birthday_event': 'Your Birthday',
     },
@@ -336,11 +340,14 @@ class AppLocalizations {
       'days_together_milestone': 'дней вместе',
       'since': 'С',
       'show_quotes': 'Показывать цитаты о любви',
-      'quote_1': 'Любить — это не значит смотреть друг на друга, а смотреть в одном направлении.',
+      'quote_1':
+          'Любить — это не значит смотреть друг на друга, а смотреть в одном направлении.',
       'quote_2': 'Там, где есть любовь, есть жизнь.',
-      'quote_3': 'Чтобы сказать «я люблю тебя», нужна секунда, а чтобы доказать это — вся жизнь.',
+      'quote_3':
+          'Чтобы сказать «я люблю тебя», нужна секунда, а чтобы доказать это — вся жизнь.',
       'quote_4': 'Ты — причина моей улыбки каждый день.',
-      'quote_5': 'Величайшее счастье в жизни — найти человека, которого стоит любить.',
+      'quote_5':
+          'Величайшее счастье в жизни — найти человека, которого стоит любить.',
       'partner_birthday_event': 'День рождения партнёра',
       'your_birthday_event': 'Мой день рождения',
     },
@@ -355,7 +362,14 @@ class AppLocalizations {
     'zh': '🇨🇳 中文',
   };
 
-  static const List<String> supportedCodes = ['en', 'vi', 'ru', 'ja', 'ko', 'zh'];
+  static const List<String> supportedCodes = [
+    'en',
+    'vi',
+    'ru',
+    'ja',
+    'ko',
+    'zh',
+  ];
 
   String t(String key) {
     return _strings[code]?[key] ?? _strings['en']?[key] ?? key;

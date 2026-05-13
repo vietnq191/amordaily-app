@@ -8,13 +8,16 @@ void main() {
       expect(quote, isNotEmpty);
     });
 
-    test('getRandomQuote returns a non-empty string for all supported languages', () {
-      final languages = ['vi', 'en', 'ja', 'ko', 'zh', 'ru'];
-      for (final lang in languages) {
-        final quote = QuotesData.getRandomQuote(lang);
-        expect(quote, isNotEmpty, reason: 'Failed for language: $lang');
-      }
-    });
+    test(
+      'getRandomQuote returns a non-empty string for all supported languages',
+      () {
+        final languages = ['vi', 'en', 'ja', 'ko', 'zh', 'ru'];
+        for (final lang in languages) {
+          final quote = QuotesData.getRandomQuote(lang);
+          expect(quote, isNotEmpty, reason: 'Failed for language: $lang');
+        }
+      },
+    );
 
     test('getRandomQuote defaults to English for unsupported language', () {
       /* We know some English quotes, let's see if it returns one of them or at least doesn't crash */

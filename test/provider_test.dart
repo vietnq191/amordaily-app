@@ -50,7 +50,10 @@ void main() {
       provider.addMilestone('Kỷ niệm 1', DateTime(2024, 1, 1));
       provider.updateMilestone(0, 'Kỷ niệm mới', DateTime(2025, 1, 1));
       expect(provider.story.customMilestones[0].title, equals('Kỷ niệm mới'));
-      expect(provider.story.customMilestones[0].date, equals(DateTime(2025, 1, 1)));
+      expect(
+        provider.story.customMilestones[0].date,
+        equals(DateTime(2025, 1, 1)),
+      );
     });
 
     test('daysTogether calculation', () {
