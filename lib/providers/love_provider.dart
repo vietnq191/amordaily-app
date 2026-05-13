@@ -248,30 +248,31 @@ class LoveProvider with ChangeNotifier {
     final emojis = ['♒', '♓', '♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑'];
 
     int idx;
-    if ((month == 1 && day >= 20) || (month == 2 && day <= 18))
+    if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) {
       idx = 0;
-    else if ((month == 2 && day >= 19) || (month == 3 && day <= 20))
+    } else if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) {
       idx = 1;
-    else if ((month == 3 && day >= 21) || (month == 4 && day <= 19))
+    } else if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) {
       idx = 2;
-    else if ((month == 4 && day >= 20) || (month == 5 && day <= 20))
+    } else if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) {
       idx = 3;
-    else if ((month == 5 && day >= 21) || (month == 6 && day <= 20))
+    } else if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) {
       idx = 4;
-    else if ((month == 6 && day >= 21) || (month == 7 && day <= 22))
+    } else if ((month == 6 && day >= 21) || (month == 7 && day <= 22)) {
       idx = 5;
-    else if ((month == 7 && day >= 23) || (month == 8 && day <= 22))
+    } else if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) {
       idx = 6;
-    else if ((month == 8 && day >= 23) || (month == 9 && day <= 22))
+    } else if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) {
       idx = 7;
-    else if ((month == 9 && day >= 23) || (month == 10 && day <= 22))
+    } else if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) {
       idx = 8;
-    else if ((month == 10 && day >= 23) || (month == 11 && day <= 21))
+    } else if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) {
       idx = 9;
-    else if ((month == 11 && day >= 22) || (month == 12 && day <= 21))
+    } else if ((month == 11 && day >= 22) || (month == 12 && day <= 21)) {
       idx = 10;
-    else
+    } else {
       idx = 11;
+    }
 
     return '${emojis[idx]} ${names[idx]}';
   }

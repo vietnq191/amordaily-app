@@ -7,7 +7,6 @@ import 'dart:io';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amordaily/utils/quotes_data.dart';
 import 'package:amordaily/utils/app_localizations.dart';
-import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

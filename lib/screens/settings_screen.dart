@@ -4,7 +4,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:amordaily/providers/love_provider.dart';
 import 'package:amordaily/utils/constants.dart';
 import 'package:amordaily/utils/app_localizations.dart';
-import 'package:intl/intl.dart';
 import 'dart:io';
 
 class SettingsScreen extends StatelessWidget {
@@ -112,7 +111,7 @@ class SettingsScreen extends StatelessWidget {
                         story.showAge = val;
                         loveProvider.updateStory(story);
                       },
-                      activeColor: AppColors.primary,
+                      activeThumbColor: AppColors.primary,
                     ),
                     _divider(),
                     SwitchListTile(
@@ -125,7 +124,7 @@ class SettingsScreen extends StatelessWidget {
                         story.showZodiac = val;
                         loveProvider.updateStory(story);
                       },
-                      activeColor: AppColors.primary,
+                      activeThumbColor: AppColors.primary,
                     ),
                     _divider(),
                     SwitchListTile(
@@ -138,7 +137,7 @@ class SettingsScreen extends StatelessWidget {
                         story.showQuotes = val;
                         loveProvider.updateStory(story);
                       },
-                      activeColor: AppColors.primary,
+                      activeThumbColor: AppColors.primary,
                     ),
                   ],
                 ),

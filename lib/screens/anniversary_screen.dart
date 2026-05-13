@@ -264,8 +264,9 @@ class AnniversaryScreen extends StatelessWidget {
                       );
                     },
                   );
-                  if (picked != null)
+                  if (picked != null) {
                     setDialogState(() => selectedDate = picked);
+                  }
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(
